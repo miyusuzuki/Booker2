@@ -12,8 +12,7 @@ class BooksController < ApplicationController
       else
          @user = current_user
          @books = Book.all
-         flash[:notice] = ' errors prohibited this obj from being saved:'
-         render "index"
+         render :index
       end
 	end
 
