@@ -26,6 +26,7 @@ class BooksController < ApplicationController
     @user = current_user
     @book = Book.find(params[:id])
     @book_new = Book.new
+    
   end
 
   def edit
@@ -62,5 +63,12 @@ class BooksController < ApplicationController
   end
   def user_params
     params.require(:user).permit(:name,:profile_image,:introduction)
+  end
+  
+  def  ensure_current_user
+      @book = Book.find(params[:id])
+     if @book.user_id != current_user.id
+        redirect_to books_path
+     end
   end
 end
